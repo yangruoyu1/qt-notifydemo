@@ -15,8 +15,8 @@ const int SPACE=20;
 用于指定新对象的父对象。构造函数的参数parent被传递给了QObject的构造函数，
 表示NotifyManager对象的父对象为parent。*/
 notifymanager::notifymanager(QObject *parent) :QObject(parent),
-    maxCount(6),
-    displayTime(10*1000)
+    maxCount(5),
+    displayTime(10*500)
 {
 
 }
@@ -41,7 +41,7 @@ void notifymanager::setDisPlayTime(int ms)
     displayTime=ms;
 }
 
-/* rearrange()函数用于重新排列当前显示的通知，保证它们不会重叠。*/
+/* 用于重新排列当前显示的通知，保证它们不会重叠。*/
 void notifymanager::rearrange()
 {
     /*这段代码获取当前桌面的可用区域（不包括任务栏等其他窗口）并计算出屏幕右下角的坐标。
@@ -58,7 +58,7 @@ void notifymanager::rearrange()
     QList<Notify*>::iterator i;
     for(i=notifyList.begin();i!=notifyList.end();i++)
     {
-        /*这段代码重新排列通知窗口的位置。
+/*这段代码重新排列通知窗口的位置。
 首先，通过notifyList.indexOf((*i))获取当前迭代器指向的元素在通知列表中的索引index。
 然后，计算通知窗口的新位置pos，通过屏幕右下角坐标bottomRight、通知窗口的宽度和高度（WIDTH、HEIGHT）
 以及相邻通知窗口之间的间距（SPACE）计算出通知窗口左上角的坐标。
@@ -83,6 +83,7 @@ QPropertyAnimation的作用是控制QWidget的位置属性从当前值逐渐变�
     }
 }
 
+//主要函数，显示提示框
 void notifymanager::showNext()
 {
     if(notifyList.size()>=maxCount||dataQueue.isEmpty()){

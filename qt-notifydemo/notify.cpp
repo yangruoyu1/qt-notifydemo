@@ -3,7 +3,10 @@
 #include<QHBoxLayout>
 #include<QVBoxLayout>
 #include<QPropertyAnimation>
+#include<QLabel>
 #include<QTimer>
+#include<QDebug>
+#include<QFontMetrics>
 #include<QMouseEvent>
 #include<QDesktopServices>
 
